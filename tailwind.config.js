@@ -1,9 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: `dark:{class}`, // Enables dark mode using a specific class
+  darkMode: "class", // Enables class-based dark mode
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        lightBackground: "#fff4ec", // Light mode background
+      },
+    },
   },
   plugins: [],
 };
