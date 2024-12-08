@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import michael from '../assets/michael.png';
 
-const Team = () => {
+// TypeScript Interface for Team Member
+interface TeamMember {
+  name: string;
+  role: string;
+  description: string;
+  image: string;
+}
+
+const Team: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle('dark', !isDarkMode);
-  };
-
-  const teamMembers = [
+  // Sample team data (can be replaced with API data)
+  const teamMembers: TeamMember[] = [
     {
       name: "Michael Habermas",
       role: "BD Learning Assistant",
@@ -17,8 +21,14 @@ const Team = () => {
         "Michael has a myriad of experience in cross-functional teams, leveraging the best educational outcomes for the BD Labs team.",
       image: michael,
     },
-    // Additional team members can be added here.
+    // Additional team members go here
   ];
+
+  // Toggle Dark Mode
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    document.documentElement.classList.toggle('dark', !isDarkMode);
+  };
 
   return (
     <div
@@ -28,6 +38,7 @@ const Team = () => {
       id="team"
     >
       <div className="container mx-auto px-4 text-center">
+        {/* Dark Mode Toggle */}
         <button
           onClick={toggleDarkMode}
           className="mb-6 px-4 py-2 bg-gray-800 text-white dark:bg-gray-100 dark:text-black rounded-lg shadow-md"
@@ -35,6 +46,7 @@ const Team = () => {
           Toggle {isDarkMode ? 'Light' : 'Dark'} Mode
         </button>
 
+        {/* Page Title */}
         <h2
           className={`text-3xl md:text-4xl font-bold ${
             isDarkMode ? 'text-gray-100' : 'text-gray-800'
@@ -50,6 +62,7 @@ const Team = () => {
           Decades of combined engineering experience.
         </p>
 
+        {/* Team Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
           {teamMembers.map((member, index) => (
             <div
@@ -84,6 +97,7 @@ export default Team;
 
 
 
+// original main code before implementing darkMode feature 
 // import React, { useState } from 'react';
 // import michael from '../assets/michael.png';
 
