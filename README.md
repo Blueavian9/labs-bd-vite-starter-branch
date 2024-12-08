@@ -51,6 +51,9 @@ npm run dev
 # Using Yarn
 yarn dev
 ```
+# Note: The current version of axios (used indirectly via openai and deca-chat) has a known moderate vulnerability. This does not block development but should be addressed in future updates.
+
+# 
 The application will be available at `http://localhost:3000`
 
 ## 🗂️ Project Structure
