@@ -21,6 +21,17 @@ const Team: React.FC = () => {
         "Michael has a myriad of experience in cross-functional teams, leveraging the best educational outcomes for the BD Labs team.",
       image: michael,
     },
+    { 
+      name: "Michael Habermas",
+      role: "BD Learning Assistant",
+      description: "Michael has got a myriad of expreience in cross functional teams to leverage the best yield of education in the BD labs team",
+      image: michael, 
+    },
+    { name: "Michael Habermas",
+      role: "BD Learning Assistant",
+      description: "Michael has got a myriad of expreience in cross functional teams to leverage the best yield of education in the BD labs team",
+      image: michael 
+    }
     // Additional team members go here
   ];
 
