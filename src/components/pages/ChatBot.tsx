@@ -1,6 +1,6 @@
 import { useState, useEffect, ReactElement } from 'react';
 import { DecaChat } from 'deca-chat';
-import Markdown from 'react-markdown'
+import Markdown from 'react-markdown';
 
 interface ChatMessage {
   role: 'user' | 'assistant' | 'system';
@@ -8,35 +8,39 @@ interface ChatMessage {
 }
 
 interface ChatbotProps {
-  apiKey?: string;
   initialSystemMessage?: string;
 }
 
 const ChatBot = ({ 
-  apiKey = import.meta.env.VITE_API_KEY,
-  initialSystemMessage = 'You are a DecaChat the friendly helpful chat bot.'
-} : ChatbotProps): ReactElement => {
+  initialSystemMessage = 'You are DecaChat, the friendly helpful chat bot.'
+}: ChatbotProps): ReactElement => {
   const [chat, setChat] = useState<DecaChat | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputMessage, setInputMessage] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  // Load API key from environment variables
+  const apiKey = import.meta.env.VITE_API_KEY;
+
   useEffect(() => {
     if (!apiKey) {
-      console.error('OpenAI API key is required');
+      console.error('API key is missing. Please check your .env file and setup.');
       return;
     }
 
+    console.log('API Key loaded successfully.'); // Debugging
+
     try {
+      // Initialize the chat instance with the provided API key and configuration
       const chatInstance = new DecaChat({
         apiKey,
-        baseUrl: 'https://api.groq.com/openai/v1',
+        baseUrl: 'https://api.groq.com/openai/v1', // Ensure this URL is correct per Groq's documentation
         model: 'llama-3.1-70b-versatile',
         temperature: 0.7
       });
 
+      // Set the system message for the chat
       chatInstance.setSystemMessage(initialSystemMessage);
-
       setChat(chatInstance);
     } catch (error) {
       console.error('Failed to initialize DecaChat:', error);
@@ -50,25 +54,14 @@ const ChatBot = ({
     setIsLoading(true);
 
     try {
-      setMessages(prev => [...prev, { 
-        role: 'user', 
-        content: trimmedMessage 
-      }]);
-
+      setMessages(prev => [...prev, { role: 'user', content: trimmedMessage }]);
       setInputMessage('');
 
       const response = await chat.chat(trimmedMessage);
-
-      setMessages(prev => [...prev, { 
-        role: 'assistant', 
-        content: response 
-      }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: response }]);
     } catch (error) {
       console.error('Chat error:', error);
-      setMessages(prev => [...prev, { 
-        role: 'assistant', 
-        content: 'Sorry, there was an error processing your message.' 
-      }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: 'Sorry, there was an error processing your message.' }]);
     } finally {
       setIsLoading(false);
     }

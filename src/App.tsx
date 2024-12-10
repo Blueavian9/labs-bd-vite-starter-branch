@@ -5,6 +5,7 @@ import ChatBot from './components/pages/ChatBot';
 import LandingPage from './components/pages/LandingPage';
 import Footer from './components/Footer';
 import DungeonCrawler from './components/pages/DungeonCrawler';
+import Logo from './assets/logo.svg'; 
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route index element={<LandingPage />} />
           <Route path='/chat' element={<ChatBot />} />
           <Route path='/game' element={<DungeonCrawler />} />
+          <Route path='/logo' element={<Logo />} /> {/* Logo displayed on '/logo' route */}
         </Route>
       </Routes>
       <Footer />
@@ -22,4 +24,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; // Corrected export
